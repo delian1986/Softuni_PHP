@@ -7,15 +7,13 @@ $indexOfNeedle = 0;
 $counter = 0;
 
 for ($i = 1; $i <= $countTimes; $i++) {
-        $indexOfOccur = strpos($text, $letter);
-        $text = substr($text, $indexOfOccur + 1);
-        $indexOfNeedle += $indexOfOccur;
-    if (strpos($text, $letter)) {
+    if ((strpos($text, $letter))!==false) {
         $counter++;
-        print_r($text);
     }
+    $indexOfOccur = strpos($text, $letter);
+    $text = substr($text, $indexOfOccur + 1);
+    $indexOfNeedle += $indexOfOccur;
 }
-print_r($counter);
 if ($counter == $countTimes) {
     $indexOfNeedle += $countTimes - 1;
     echo $indexOfNeedle;
