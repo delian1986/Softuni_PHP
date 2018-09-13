@@ -1,7 +1,6 @@
 <?php
 
 namespace Google;
-include "../config.php";
 
 
 
@@ -71,5 +70,10 @@ class Company
         $this->name = $name;
     }
 
+    public function __toString()
+    {
+        $salary=number_format($this->salary,2);
+        return "$this->name $this->department $salary\n";
+    }
 
 }

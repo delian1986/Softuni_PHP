@@ -1,7 +1,6 @@
 <?php
 
 namespace Google;
-include_once "../config.php";
 
 
 class Children
@@ -51,6 +50,9 @@ class Children
     {
         $this->bDay = $bDay;
     }
-
+    public function __toString()
+    {
+        return "$this->name $this->bDay\n";
+    }
 
 }

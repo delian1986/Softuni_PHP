@@ -1,8 +1,8 @@
 <?php
 
 namespace Google;
-include "./config.php";
 
+include 'config.php';
 class App
 {
     private $persons = [];
@@ -14,14 +14,20 @@ class App
 
     private function processInput()
     {
-        $args = explode(" ", $this->readLine());
-        $personName = $args[0];
-        $class = $args[1];
+        while (1){
+            $line = $this->readLine();
+            if ($line=="End"){break;}
+            $args=explode(" ",$line);
 
-        if (!$this->personExist($personName)) {
-            $this->persons[] = new Person($personName);
+            $personName = $args[0];
+
+            if (!$this->personExist($personName)) {
+                $this->persons[$personName] = new Person($personName);
+            }
+            $this->newClassToAdd($args);
         }
-        $this->newClassToAdd($args);
+        $needlePersonName=$this->readLine();
+        echo $this->persons[$needlePersonName];
     }
 
     private function newClassToAdd($args)
@@ -34,7 +40,21 @@ class App
                 $this->persons[$personName]->setCompany($company);
                 break;
             case "pokemon":
-
+                $pokemon=new Pokemon(...$props);
+                $this->persons[$personName]->setPokemons($pokemon);
+                break;
+            case "parents":
+                $parent=new Parents(...$props);
+                $this->persons[$personName]->setParents($parent);
+                break;
+            case "children":
+                $children=new Children(...$props);
+                $this->persons[$personName]->setChildren($children);
+                break;
+            case "car":
+                $car=new Car(...$props);
+                $this->persons[$personName]->setCar($car);
+                break;
         }
     }
 
@@ -48,5 +68,6 @@ class App
         return trim(fgets(STDIN));
     }
 }
-
+$app=new App();
+$app->start();
 

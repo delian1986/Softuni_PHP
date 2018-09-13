@@ -1,11 +1,11 @@
 <?php
 
 namespace Google;
-include_once "../config.php";
 
 
 class Car
 {
+
     private $model;
     private $speed;
 
@@ -50,6 +50,11 @@ class Car
     public function setSpeed($speed): void
     {
         $this->speed = $speed;
+    }
+
+    public function __toString()
+    {
+        return "$this->model $this->speed\n";
     }
 
 

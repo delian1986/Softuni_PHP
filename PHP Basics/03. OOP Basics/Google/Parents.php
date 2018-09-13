@@ -1,23 +1,22 @@
 <?php
 
 namespace Google;
-include_once "../config.php";
 
 
-class Pokemon
+class Parents
 {
     private $name;
-    private $type;
+    private $bDay;
 
     /**
-     * Pokemon constructor.
+     * Parents constructor.
      * @param $name
-     * @param $type
+     * @param $bDay
      */
-    public function __construct($name, $type)
+    public function __construct(string $name, string $bDay)
     {
         $this->name = $name;
-        $this->type = $type;
+        $this->bDay = $bDay;
     }
 
     /**
@@ -39,18 +38,22 @@ class Pokemon
     /**
      * @return mixed
      */
-    public function getType()
+    public function getBDay()
     {
-        return $this->type;
+        return $this->bDay;
     }
 
     /**
-     * @param mixed $type
+     * @param mixed $bDay
      */
-    public function setType($type): void
+    public function setBDay($bDay): void
     {
-        $this->type = $type;
+        $this->bDay = $bDay;
     }
 
+    public function __toString()
+    {
+        return "$this->name $this->bDay\n";
+    }
 
 }
