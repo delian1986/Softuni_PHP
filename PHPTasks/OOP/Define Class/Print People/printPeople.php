@@ -1,26 +1,20 @@
 <?php
 namespace PrintPeople;
 
-$people = [];
-while (true) {
-    $tokens = explode(" ", trim(fgets(STDIN)));
-    if ($tokens[0] === "END") {
-        break;
-    }
-    $people[] = new Person($tokens[0], intval($tokens[1]), $tokens[2]);
+$people=[];
+
+while (1) {
+    $line = readline();
+    if ($line == "END"){break;}
+    list($name, $age, $occupation) = explode(" ", $line);
+    $person = new Person($name, $age, $occupation);
+    $people[]=$person;
 }
-usort($people, function (Person $p1, Person $p2) {
-    return $p1->getAge() <=> $p2->getAge();
+
+usort($people,function ($a,$b){
+   return $a->age <=> $b->age;
 });
-echo implode(PHP_EOL, $people);
-while (true) {
-    $tokens = explode(" ", trim(fgets(STDIN)));
-    if ($tokens[0] === "END") {
-        break;
-    }
-    $people[] = new Person($tokens[0], intval($tokens[1]), $tokens[2]);
+
+foreach ($people as $person){
+    echo $person;
 }
-usort($people, function (Person $p1, Person $p2) {
-    return $p1->getAge() <=> $p2->getAge();
-});
-echo implode(PHP_EOL, $people);

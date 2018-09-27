@@ -2,11 +2,12 @@
 
 namespace PrintPeople;
 
+
 class Person
 {
-    private $name;
-    private $age;
-    private $occupation;
+    public $name;
+    public $age;
+    public $occupation;
 
     public function __construct(string $name, int $age, string $occupation)
     {
@@ -15,13 +16,9 @@ class Person
         $this->occupation = $occupation;
     }
 
-    public function getAge(): int
+    public function __toString()
     {
-        return $this->age;
-    }
-
-    public function __toString(): string
-    {
-        return "{$this->name} - age: {$this->age}, occupation: {$this->occupation}";
+        return "$this->name - age: $this->age, occupation: $this->occupation\n";
     }
 }
+
