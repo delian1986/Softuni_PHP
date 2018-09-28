@@ -1,39 +1,37 @@
 <?php
 
 
-namespace Animals;
-
-
 class Animal
 {
     protected $name;
     protected $age;
     protected $gender;
 
-    public function __construct(string $name,int $age,string $gender)
+    public function __construct( $name, $age, $gender)
     {
         $this->setName($name);
         $this->setAge($age);
         $this->setGender($gender);
     }
 
-    private function setGender($gender){
-        if ($gender===""){
-            throw new \Exception("Invalid input!");
+    protected function setGender($gender){
+
+        if ($gender!=="Male" and $gender!=="Female"){
+            throw new Exception("Invalid input!");
         }
         $this->gender=$gender;
     }
 
-    private function setAge($age){
-        if ($age==="" or $age<1){
-            throw new \Exception("Invalid input!");
+    protected function setAge($age){
+        if ($age<0 or $age===""){
+            throw new Exception("Invalid input!\n");
         }
         $this->age=$age;
     }
 
-    private function setName($name){
-        if ($name===""){
-            throw new \Exception("Invalid input!");
+    protected function setName($name){
+        if (!strlen($name)){
+            throw new Exception("Invalid input!\n");
         }
         $this->name=$name;
     }
@@ -48,6 +46,7 @@ class Animal
         $name=$this->name;
         $age=$this->age;
         $gender=$this->gender;
+
         $result="$className $name $age $gender\n";
         $result.=$this->produceSound();
 
