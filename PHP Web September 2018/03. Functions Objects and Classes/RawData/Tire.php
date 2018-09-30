@@ -14,4 +14,8 @@ class Tire
         $this->age=$age;
         $this->pressure=$pressure;
     }
+
+    public function getPressure():float {
+        return $this->pressure;
+    }
 }
