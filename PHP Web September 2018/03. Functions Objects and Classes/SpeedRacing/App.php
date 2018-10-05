@@ -1,5 +1,5 @@
 <?php
-//60/100
+//80/100
 
 namespace Speed;
 require "Car.php";

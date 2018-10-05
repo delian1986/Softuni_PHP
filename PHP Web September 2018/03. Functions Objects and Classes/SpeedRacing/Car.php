@@ -19,10 +19,10 @@ class Car
     }
 
     public function Drive($amountOfKm){
-        $fuelNeeded=round($amountOfKm*$this->fuelCost,2);
+        $fuelNeeded=$amountOfKm*$this->fuelCost;
         if ($fuelNeeded<=$this->fuelAmount){
-            $this->fuelAmount-=$fuelNeeded;
-            $this->distanceTraveled+=$amountOfKm;
+            $this->fuelAmount-=number_format($fuelNeeded,2);
+            $this->distanceTraveled+=number_format($amountOfKm,2);
         }else{
            echo "Insufficient fuel for the drive\n";
         }
@@ -30,7 +30,7 @@ class Car
 
     public function __toString()
     {
-        $fuelAmount=sprintf("%01.2f", round($this->fuelAmount,2));
+        $fuelAmount=number_format($this->fuelAmount,2,'.','');
         return "$this->model $fuelAmount $this->distanceTraveled\n";
     }
 }
