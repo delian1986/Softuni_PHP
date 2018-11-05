@@ -28,6 +28,7 @@ abstract class HttpHandlerAbstract
 
     public function redirect($url){
         header('Location: '.$url);
+        exit();
     }
 
 }
