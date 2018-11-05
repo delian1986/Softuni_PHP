@@ -33,9 +33,7 @@ class UserService implements UserServiceInterface
             return false;
         }
 
-        $plainPass = $userDTO->getPassword();
-        $passHash = password_hash($plainPass, PASSWORD_BCRYPT);
-        $userDTO->setPassword($passHash);
+        $this->encryptPassword($userDTO);
 
         return $this->userRepository->insert($userDTO);
     }
@@ -52,7 +50,6 @@ class UserService implements UserServiceInterface
         if (false === password_verify($password, $currPassHash)) {
             return null;
         }
-
         return $currentUser;
     }
 
@@ -68,6 +65,32 @@ class UserService implements UserServiceInterface
 
     public function edit(UserDTO $userDTO): bool
     {
-        // TODO: Implement edit() method.
+        $currentUser = $this->userRepository->findOneByUsername($userDTO->getUsername());
+
+        if (null !== $currentUser) {
+            return false;
+        }
+
+        $this->encryptPassword($userDTO);
+
+        return $this->userRepository->update($_SESSION['id'],$userDTO);
+    }
+
+    /**
+     * @param UserDTO $userDTO
+     */
+    public function encryptPassword(UserDTO $userDTO): void
+    {
+        $plainPass = $userDTO->getPassword();
+        $passHash = password_hash($plainPass, PASSWORD_BCRYPT);
+        $userDTO->setPassword($passHash);
+    }
+
+    /**
+     * @return \Generator | UserDTO[]
+     */
+    public function allUsers(): \Generator
+    {
+        return $this->userRepository->findAll();
     }
 }
