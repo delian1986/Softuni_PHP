@@ -20,19 +20,19 @@
 
     <div>
         First Name:<label>
-            <input type="text" name="first_name">
+            <input type="text" name="firstName">
         </label>
     </div>
 
     <div>
         Last Name:<label>
-            <input type="text" name="last_name">
+            <input type="text" name="lastName">
         </label>
     </div>
 
     <div>
         Birthday:<label>
-            <input type="text" name="born_on">
+            <input type="text" name="bornOn">
         </label>
     </div>
     <input type="submit" name="register" value="Register">

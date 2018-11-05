@@ -67,7 +67,7 @@ class UserRepository implements UserRepositoryInterface
                   first_name as firstName,
                   last_name as lastName,
                   born_on as bornOn
-                  FROM skeleton.users WHERE username=?';
+                  FROM skeleton.users WHERE id=?';
 
         return $this->db->query($query)
             ->execute([$id])
@@ -88,5 +88,21 @@ class UserRepository implements UserRepositoryInterface
                 $id
             ]);
         return true;
+    }
+
+    public function findAll(): \Generator
+    {
+        $query = 'SELECT 
+                  id,
+                  username,
+                  password,
+                  first_name as firstName,
+                  last_name as lastName,
+                  born_on as bornOn
+                  FROM skeleton.users';
+
+        return $this->db->query($query)
+            ->execute()
+            ->fetch(UserDTO::class);
     }
 }

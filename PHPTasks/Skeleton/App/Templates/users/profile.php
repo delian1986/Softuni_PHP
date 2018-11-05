@@ -10,26 +10,28 @@
 
     <div>
         Password:<label>
-            <input type="password" name="password">
+            <input type="password" name="password" required>
         </label>
     </div>
 
     <div>
         First Name:<label>
-            <input type="text" name="first_name" value="<?=$data->getFirstName() ?>" >
+            <input type="text" name="firstName" value="<?=$data->getFirstName() ?>" >
         </label>
     </div>
 
     <div>
         Last Name:<label>
-            <input type="text" name="last_name" value="<?=$data->getLastName() ?>">
+            <input type="text" name="lastName" value="<?=$data->getLastName() ?>">
         </label>
     </div>
 
     <div>
         Birthday:<label>
-            <input type="text" name="born_on" value="<?=$data->getBornOn() ?>">
+            <input type="text" name="bornOn" value="<?=$data->getBornOn() ?>">
         </label>
     </div>
-    <input type="submit" name="edit" value="Edit">
+    <input type="submit" name="edit" value="Edit Profile">
 </form>
+
+You can <a href="logout.php">logout</a> or see <a href="all.php">all users</a>
