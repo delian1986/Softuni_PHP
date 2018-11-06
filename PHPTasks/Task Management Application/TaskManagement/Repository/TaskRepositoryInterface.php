@@ -20,5 +20,4 @@ interface TaskRepositoryInterface
 
     public function delete(int $id):bool ;
 
-
 }
