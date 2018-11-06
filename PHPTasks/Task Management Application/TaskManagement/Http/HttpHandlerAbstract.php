@@ -30,9 +30,9 @@ abstract class HttpHandlerAbstract
         $this->binder = $binder;
     }
 
-    public function render(string $templateName, $data = null): void
+    public function render(string $templateName, $data = null, array $error=[]): void
     {
-        $this->template->render($templateName, $data);
+        $this->template->render($templateName, $data,$error);
     }
 
     public function redirect(string $url): void

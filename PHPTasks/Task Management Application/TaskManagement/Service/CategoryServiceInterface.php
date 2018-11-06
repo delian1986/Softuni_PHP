@@ -15,4 +15,5 @@ interface CategoryServiceInterface
     public function report():\Generator;
 
     public function view(int $id): CategoryDTO;
+
 }

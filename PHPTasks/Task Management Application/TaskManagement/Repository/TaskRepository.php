@@ -30,7 +30,7 @@ class TaskRepository implements TaskRepositoryInterface
     public function __construct(DatabaseInterface $db, DataBinderInterface $binder)
     {
         $this->db = $db;
-        $this->binder=$binder;
+        $this->binder = $binder;
     }
 
     public function count(): int
@@ -85,11 +85,11 @@ class TaskRepository implements TaskRepositoryInterface
              * @var UserDTO $author
              * @var CategoryDTO $category
              */
-            $task=$this->binder->bind($row,TaskDTO::class);
+            $task = $this->binder->bind($row, TaskDTO::class);
             $task->setId($row['task_id']);
-            $author=$this->binder->bind($row,UserDTO::class);
+            $author = $this->binder->bind($row, UserDTO::class);
             $author->setId($row['author_id']);
-            $category=$this->binder->bind($row,CategoryDTO::class);
+            $category = $this->binder->bind($row, CategoryDTO::class);
             $category->setId($row['category_id']);
 
             $task->setAuthor($author);
@@ -101,27 +101,51 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function findOne(int $id): TaskDTO
     {
-        $qry = 'SELECT 
-                  id,
+        $qry = "SELECT 
+                  tasks.id as task_id,
                   title,
                   description,
                   location,
-                  author_id,
-                  category_id,
-                  started_on,
-                  due_date 
+                 users.id as author_id,
+                 users.username as username,
+                 users.password as password,
+                 users.first_name as firstName,
+                 users.last_name as lastName,
+                  categories.id as category_id,
+                  categories.name as name,
+                  started_on as startedOn,
+                  due_date as dueDate
               FROM tasks
-              WHERE
-                  id=?
-              ORDER BY 
-                  due_date DESC ,
-                  id ASC 
-              ';
+              INNER JOIN categories
+                ON tasks.category_id =categories.id
+                INNER JOIN users
+                ON tasks.author_id = users.id
+              WHERE 
+                  tasks.id=?
+              ";
 
-        return $this->db->query($qry)
+        $row= $this->db->query($qry)
             ->execute($id)
-            ->fetch(TaskDTO::class)
+            ->fetch()
             ->current();
+
+        /**
+         * @var TaskDTO $task
+         * @var UserDTO $author
+         * @var CategoryDTO $category
+         */
+
+            $task = $this->binder->bind($row, TaskDTO::class);
+            $task->setId($row['task_id']);
+            $author = $this->binder->bind($row, UserDTO::class);
+            $author->setId($row['author_id']);
+            $category = $this->binder->bind($row, CategoryDTO::class);
+            $category->setId($row['category_id']);
+
+            $task->setAuthor($author);
+            $task->setCategory($category);
+
+            return $task;
     }
 
     public function insert(TaskDTO $task): bool
@@ -159,12 +183,13 @@ class TaskRepository implements TaskRepositoryInterface
                author_id=?,
                category_id=?,
                started_on=?,
-               due_date=?,
-               id=?
+               due_date=?
+               
             WHERE
                 id=?
             ';
-        $this->db->query($qry)->execute(
+        $this->db->query($qry)
+            ->execute(
             $task->getTitle(),
             $task->getDescription(),
             $task->getLocation(),
@@ -172,7 +197,7 @@ class TaskRepository implements TaskRepositoryInterface
             $task->getCategory()->getId(),
             $task->getStartedOn(),
             $task->getDueDate(),
-            $task->getId()
+            $id
         );
 
         return true;

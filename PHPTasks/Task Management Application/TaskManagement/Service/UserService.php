@@ -40,7 +40,13 @@ class UserService implements UserServiceInterface
         return true;
     }
 
-    public function register(UserDTO $user,string $confirmPassword): bool
+    /**
+     * @param UserDTO $user
+     * @param string $confirmPassword
+     * @return bool
+     * @throws \Exception
+     */
+    public function register(UserDTO $user, string $confirmPassword): bool
     {
 
 
@@ -61,4 +67,15 @@ class UserService implements UserServiceInterface
         return $this->userRepository->insert($user);
     }
 
+    /**
+     * @return UserDTO
+     * @throws \Exception
+     */
+    public function getCurrentUser(): UserDTO
+    {
+        if (!isset($_SESSION['id'])){
+            throw new \Exception('No current user!');
+        }
+        return $this->userRepository->findOneById(intval($_SESSION['id']));
+    }
 }

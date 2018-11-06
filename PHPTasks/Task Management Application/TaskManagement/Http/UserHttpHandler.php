@@ -51,14 +51,26 @@ class UserHttpHandler extends HttpHandlerAbstract
 
     public function handleLoginProcess(array $formData=[]): void
     {
-        $this->userService->login($formData['username'],$formData['password']);
-        $this->redirect('dashboard.php');
+        try{
+            $this->userService->login($formData['username'],$formData['password']);
+            $this->redirect('dashboard.php');
+        }catch (\Exception $e){
+            $user=$this->binder->bind($formData,UserDTO::class);
+            $this->render('users/login',$user,[$e->getMessage()]);
+        }
+
     }
 
     public function handleRegisterProcess(array $formData=[]): void
     {
-        $user=$this->binder->bind($formData, UserDTO::class);
-        $this->userService->register($user,$formData['confirm_password']);
-        $this->redirect('success.php');
+        try{
+            $user=$this->binder->bind($formData, UserDTO::class);
+            $this->userService->register($user,$formData['confirm_password']);
+            $this->redirect('success.php');
+        }catch (\Exception $e){
+            $user=$this->binder->bind($formData,UserDTO::class);
+            $this->render('users/register',$user,[$e->getMessage()]);
+        }
+
     }
 }

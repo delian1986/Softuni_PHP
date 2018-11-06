@@ -63,4 +63,20 @@ class UserRepository implements UserRepositoryInterface
     }
 
 
+    public function findOneById(int $id): UserDTO
+    {
+        $qry = "SELECT 
+                      id, 
+                      username,
+                      password,
+                      first_name as firstName,
+                      last_name as lastName 
+                FROM users
+                WHERE id=?";
+
+        return $this->db->query($qry)
+            ->execute($id)
+            ->fetch(UserDTO::class)
+            ->current();
+    }
 }

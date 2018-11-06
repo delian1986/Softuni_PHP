@@ -42,6 +42,6 @@ class CategoryService implements CategoryServiceInterface
 
     public function view(int $id): CategoryDTO
     {
-        return $this->categoryRepository->findOne($id);
+        return $this->categoryRepository->findOne(intval($id));
     }
 }
