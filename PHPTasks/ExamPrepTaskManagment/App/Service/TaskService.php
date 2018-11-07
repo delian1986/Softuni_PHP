@@ -37,4 +37,14 @@ class TaskService implements TaskServiceInterface
     {
         return $this->taskRepository->getCurrent($id);
     }
+
+    public function update(TaskDTO $taskDTO, int $id): bool
+    {
+        return $this->taskRepository->edit($taskDTO,$id);
+    }
+
+    public function remove(int $id): bool
+    {
+        return $this->taskRepository->remove($id);
+    }
 }

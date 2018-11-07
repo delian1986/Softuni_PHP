@@ -102,7 +102,8 @@ class TaskRepository extends RepositoryAbstract implements TaskRepositoryInterfa
 
         $data = $this->db->query($query)
             ->execute([$id])
-            ->fetch();
+            ->fetch()
+            ->current();
 
         /**
          * @var TaskDTO $task
@@ -121,5 +122,36 @@ class TaskRepository extends RepositoryAbstract implements TaskRepositoryInterfa
         $task->setAuthor($author);
         $task->setCategory($category);
         return $task;
+    }
+
+    public function edit(TaskDTO $taskDTO,int $id): bool
+    {
+        $qry = 'UPDATE 
+                    tasks
+                    SET title=?, description=?, location=?, author_id=?, category_id=?, started_on=?, due_date=?
+              WHERE id=?';
+
+        $this->db->query($qry)
+            ->execute([
+                $taskDTO->getTitle(),
+                $taskDTO->getDescription(),
+                $taskDTO->getLocation(),
+                $taskDTO->getAuthor()->getId(),
+                $taskDTO->getCategory()->getId(),
+                $taskDTO->getStartedOn(),
+                $taskDTO->getDueDate(),
+                $id
+            ]);
+        return true;
+    }
+
+    public function remove(int $id): bool
+    {
+        $qry='DELETE FROM tasks WHERE id=?';
+
+        $this->db->query($qry)
+            ->execute([$id]);
+
+        return true;
     }
 }
