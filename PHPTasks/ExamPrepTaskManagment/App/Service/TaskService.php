@@ -4,6 +4,7 @@
 namespace App\Service;
 
 
+use App\Data\TaskDTO;
 use App\Repository\TaskRepositoryInterface;
 
 class TaskService implements TaskServiceInterface
@@ -25,5 +26,15 @@ class TaskService implements TaskServiceInterface
     public function allTasks(): \Generator
     {
        return $this->taskRepository->all();
+    }
+
+    public function insert(TaskDTO $taskDTO): bool
+    {
+        return $this->taskRepository->add($taskDTO);
+    }
+
+    public function getOne(int $id): TaskDTO
+    {
+        return $this->taskRepository->getCurrent($id);
     }
 }

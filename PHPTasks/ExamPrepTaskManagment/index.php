@@ -1,10 +1,10 @@
 <?php
 require_once 'common.php';
 
-$taskRepository=new \App\Repository\TaskRepository($db);
+$taskRepository=new \App\Repository\TaskRepository($db,$dataBinder);
 $taskService=new \App\Service\TaskService($taskRepository);
-$taskHttpHandler= new \App\Http\TaskHttpHandler($template,$dataBinder);
-$taskHttpHandler->index($taskService);
+$homeHttpHandler= new \App\Http\HomeHttpHandler($template,$dataBinder);
+$homeHttpHandler->index($taskService);
 
 
 

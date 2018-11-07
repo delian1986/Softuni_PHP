@@ -6,11 +6,11 @@ namespace App\Http;
 
 use App\Service\TaskServiceInterface;
 
-class TaskHttpHandler extends HttpHandlerAbstract
+class HomeHttpHandler extends HttpHandlerAbstract
 {
     public function index(TaskServiceInterface $taskService){
         if (!isset($_SESSION['id'])){
-            $this->redirect('index.php');
+            $this->render('home/index');
         }else{
             $this->render('tasks/index',$taskService->allTasks());
         }

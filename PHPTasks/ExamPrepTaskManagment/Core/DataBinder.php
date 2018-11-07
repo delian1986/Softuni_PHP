@@ -7,6 +7,12 @@ namespace Core;
 
 class DataBinder implements DataBinderInterface
 {
+    /**
+     * @param array $form
+     * @param $className
+     * @return mixed
+     * @throws \ReflectionException
+     */
     public function bind(array $form, $className)
     {
         $classInfo= new \ReflectionClass($className);

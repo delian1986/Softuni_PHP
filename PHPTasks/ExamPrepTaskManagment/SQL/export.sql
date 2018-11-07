@@ -12,7 +12,7 @@ create table users(
 
 CREATE table categories(
   id INT AUTO_INCREMENT PRIMARY KEY ,
-  type VARCHAR(50) NOT NULL UNIQUE
+  name VARCHAR(50) NOT NULL UNIQUE
 );
 
 INSERT INTO categories(type)

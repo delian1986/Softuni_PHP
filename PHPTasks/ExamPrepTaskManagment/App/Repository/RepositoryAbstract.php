@@ -18,7 +18,7 @@ class RepositoryAbstract
     /**
      * @var DataBinderInterface
      */
-    private $binder;
+    protected $binder;
 
     /**
      * UserRepository constructor.

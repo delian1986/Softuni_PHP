@@ -6,6 +6,8 @@ namespace App\Data;
 
 class CategoryDTO
 {
+    private CONST NAME_MIN_LENGTH=3;
+    private CONST NAME_MAX_LENGTH=50;
     /**
      * @var int
      */
@@ -14,7 +16,7 @@ class CategoryDTO
     /**
      * @var string
      */
-    private $type;
+    private $name;
 
     /**
      * @return int
@@ -35,17 +37,20 @@ class CategoryDTO
     /**
      * @return string
      */
-    public function getType(): string
+    public function getName(): string
     {
-        return $this->type;
+        return $this->name;
     }
 
     /**
-     * @param string $type
+     * @param string $name
+     * @throws \Exception
      */
-    public function setType(string $type): void
+    public function setName(string $name): void
     {
-        $this->type = $type;
+        if (ValidatorDTO::validate(self::NAME_MIN_LENGTH,self::NAME_MAX_LENGTH,$name,'Category name must be between 3 and 50 symbols long!')){
+            $this->name = $name;
+        }
     }
     
 
