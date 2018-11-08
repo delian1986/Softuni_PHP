@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Delyan
- * Date: 1.11.2018 г.
- * Time: 11:24
- */
+
 
 namespace Database;
 
@@ -17,18 +12,34 @@ class PDOResultSet implements ResultSetInterface
     private $pdoStatement;
 
     /**
-     * PDOStatement constructor.
-     * @param $pdoStatement
+     * PDOPreparedStatement constructor.
+     * @param \PDOStatement $pdoStatement
      */
     public function __construct(\PDOStatement $pdoStatement)
     {
         $this->pdoStatement = $pdoStatement;
     }
 
-    public function fetch($className): \Generator
+    /**
+     * @param $className
+     * @return \Generator
+     */
+    public function fetch($className = null): \Generator
     {
-        while ($row = $this->pdoStatement->fetchObject($className)) {
-            yield $row;
+        if (null === $className) {
+            while ($row = $this->pdoStatement->fetch(\PDO::FETCH_ASSOC)) {
+                yield $row;
+            }
+        } else {
+            while ($row = $this->pdoStatement->fetchObject($className)) {
+                yield $row;
+            }
         }
+
+    }
+
+    public function fetchColumn(int $columnNum = 0)
+    {
+        return $this->pdoStatement->fetchColumn($columnNum);
     }
 }
