@@ -27,7 +27,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function insert(UserDTO $userDTO): bool
     {
-        $query = 'INSERT INTO skeleton.users(username,password,first_name,last_name,born_on)
+        $query = 'INSERT INTO users(username,password,first_name,last_name,born_on)
                 VALUES (?,?,?,?,?)';
 
         $this->db->query($query)
@@ -50,7 +50,7 @@ class UserRepository implements UserRepositoryInterface
                   first_name as firstName,
                   last_name as lastName,
                   born_on as bornOn
-                  FROM skeleton.users WHERE username=?';
+                  FROM users WHERE username=?';
 
         return $this->db->query($query)
             ->execute([$username])
@@ -67,7 +67,7 @@ class UserRepository implements UserRepositoryInterface
                   first_name as firstName,
                   last_name as lastName,
                   born_on as bornOn
-                  FROM skeleton.users WHERE id=?';
+                  FROM users WHERE id=?';
 
         return $this->db->query($query)
             ->execute([$id])
@@ -99,7 +99,7 @@ class UserRepository implements UserRepositoryInterface
                   first_name as firstName,
                   last_name as lastName,
                   born_on as bornOn
-                  FROM skeleton.users';
+                  FROM users';
 
         return $this->db->query($query)
             ->execute()
