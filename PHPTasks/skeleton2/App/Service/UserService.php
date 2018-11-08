@@ -69,12 +69,17 @@ class UserService implements UserServiceInterface
         }
     }
 
+    /**
+     * @param UserDTO $userDTO
+     * @return bool
+     * @throws \Exception
+     */
     public function edit(UserDTO $userDTO): bool
     {
         $currentUser = $this->userRepository->findOneByUsername($userDTO->getUsername());
 
         if (null !== $currentUser) {
-            return false;
+            throw new \Exception('User with that username is already registered!');
         }
 
         $this->encryptPassword($userDTO);
@@ -84,6 +89,7 @@ class UserService implements UserServiceInterface
 
     /**
      * @param UserDTO $userDTO
+     * @throws \Exception
      */
     public function encryptPassword(UserDTO $userDTO): void
     {

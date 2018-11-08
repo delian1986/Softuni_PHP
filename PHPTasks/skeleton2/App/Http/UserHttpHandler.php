@@ -39,56 +39,72 @@ class UserHttpHandler extends HttpHandlerAbstract
         }
     }
 
-    public function login(UserServiceInterface $userService, $formData = [])
+    public function login($formData = [])
     {
         if (isset($formData['login'])) {
-            $this->handleLogin($userService, $formData);
+            $this->handleLogin($formData);
         } else {
+            if (isset($_SESSION['username'])) {
+                $username = $_SESSION['username'];
+                $this->render('users/login', $username);
+            }
             $this->render('users/login');
         }
     }
 
-    public function handleLogin(UserServiceInterface $userService, $formData)
+    public function handleLogin($formData)
     {
-        $currUser = $userService->login($formData['username'], $formData['password']);
+        $currUser = $this->userService->login($formData['username'], $formData['password']);
         if ($currUser !== null) {
             $_SESSION['id'] = $currUser->getId();
             $this->redirect('profile.php');
         } else {
-//            $this->render('app/error', new ErrorDTO('Username does not exists or password mismatch'));
-
+            $this->render('users/login', null, ['Username does not exists or password mismatch!']);
         }
     }
 
-    public function profile(UserServiceInterface $userService, $formData = [])
+    public function profile($formData = [])
     {
-        $currentUser = $userService->currentUser();
+        $currentUser = $this->userService->currentUser();
         if ($currentUser === null) {
             $this->redirect('login.php');
         }
 
         if (isset($formData['edit'])) {
-            $this->handleEditProfile($userService, $formData);
+            $this->handleEditProfile($formData);
         } else {
             $this->render('users/profile', $currentUser);
 
         }
     }
 
-    public function handleEditProfile(UserServiceInterface $userService, $formData = [])
+    /**
+     * @param array $formData
+     */
+    public function handleEditProfile($formData = [])
     {
-        $user = $this->dataBinder->bind($formData, UserDTO::class);
+        try {
+            $user = $this->dataBinder->bind($formData, UserDTO::class);
+            $this->userService->edit($user);
             $this->redirect('profile.php');
+        } catch (\Exception $e) {
+            $currentUser = $this->userService->currentUser();
+            $this->render('users/profile', $currentUser, [$e->getMessage()]);
+        }
     }
 
-    public function allUsers(UserServiceInterface $userService)
+    public function allUsers()
     {
-        $this->render('users/all', $userService->allUsers());
+        $this->render('users/all', $this->userService->allUsers());
     }
 
     public function index()
     {
-        $this->render('home/index');
+        if (!isset($_SESSION['id'])) {
+            $this->render('home/index');
+        }else{
+            //TODO
+        }
     }
 
     /**
@@ -96,15 +112,14 @@ class UserHttpHandler extends HttpHandlerAbstract
      */
     public function handleRegisterProcess($formData): void
     {
-        try{
+        try {
             /** @var UserDTO $user */
-            $user=$this->dataBinder->bind($formData, UserDTO::class);
-            $this->userService->register($user,$formData['confirm_password']);
-            $_SESSION['username']=$user->getUsername();
+            $user = $this->dataBinder->bind($formData, UserDTO::class);
+            $this->userService->register($user, $formData['confirm_password']);
+            $_SESSION['username'] = $user->getUsername();
             $this->redirect('login.php');
-        }catch (\Exception $e){
-//            $user=$this->dataBinder->bind($formData, UserDTO::class);
-            $this->render('users/register',null,null,[$e->getMessage()]);
+        } catch (\Exception $e) {
+            $this->render('users/register', null, [$e->getMessage()]);
         }
     }
 }

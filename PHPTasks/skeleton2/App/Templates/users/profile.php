@@ -1,6 +1,11 @@
 <?php /** @var \App\Data\UserDTO $data */ ?>
+<?php /** @var array $errors|null */?>
 
 <h1>YOUR PROFILE</h1>
+<?php foreach ($errors as $error): ?>
+    <p style="color: red"><?= $error ?></p>
+<?php endforeach; ?>
+
 <form method="post">
     <div>
         Username:<label>

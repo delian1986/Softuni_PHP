@@ -1,9 +1,12 @@
-
+<?php /**@var $data */?>
+<?php /** @var array $errors */?>
 
 <h1>User Login</h1>
-<?php if(isset($_SESSION['username'])):?>
-<p style="color: green"><?= $_SESSION['username'] ?></p>
-<?php endif;?>
+<p style="color: green"><?= $data ?></p>
+
+<?php foreach ($errors as $error): ?>
+    <p style="color: red"><?= $error ?></p>
+<?php endforeach; ?>
 
 <form method="post">
     <div>
@@ -20,3 +23,5 @@
 
     <input type="submit" name="login" value="Login">
 </form>
+
+<p>Don't have and account? <a href="register.php">Register</a></p>
