@@ -2,7 +2,9 @@
 <?php /** @var array $errors */?>
 
 <h1>User Login</h1>
-<p style="color: green"><?= $data ?></p>
+<?php if($data!=""):?>
+<p style="color: green">Welcome, <?= $data ?>! Please Log in!</p>
+<?php endif ?>
 
 <?php foreach ($errors as $error): ?>
     <p style="color: red"><?= $error ?></p>
