@@ -31,4 +31,10 @@ class PDODatabase implements DatabaseInterface
         $stmt=$this->pdo->prepare($query);
         return new PDOPreparedStatement($stmt);
     }
+
+
+    public function lastInsertId(): int
+    {
+        return $this->pdo->lastInsertId();
+    }
 }

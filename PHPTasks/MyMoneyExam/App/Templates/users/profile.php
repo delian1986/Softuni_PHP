@@ -20,20 +20,15 @@
     </div>
 
     <div>
-        First Name:<label>
-            <input type="text" name="firstName" value="<?=$data->getFirstName() ?>" >
+        Full Name:<label>
+            <input type="text" name="full_name" value="<?=$data->getFullName() ?>" >
         </label>
     </div>
 
-    <div>
-        Last Name:<label>
-            <input type="text" name="lastName" value="<?=$data->getLastName() ?>">
-        </label>
-    </div>
 
     <div>
         Birthday:<label>
-            <input type="text" name="bornOn" value="<?=$data->getBornOn() ?>">
+            <input type="date" name="born_on" value="<?=$data->getBornOn() ?>">
         </label>
     </div>
     <input type="submit" name="edit" value="Edit Profile">

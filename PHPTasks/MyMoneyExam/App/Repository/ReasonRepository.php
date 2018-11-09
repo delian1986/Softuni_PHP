@@ -18,4 +18,14 @@ class ReasonRepository extends RepositoryAbstract implements ReasonRepositoryInt
            ->fetch(ReasonDTO::class);
 
     }
+
+    public function getOneById(int $id): ?ReasonDTO
+    {
+        $qry='SELECT id, name FROM reasons WHERE id=?';
+
+        return $this->db->query($qry)
+            ->execute([$id])
+            ->fetch(ReasonDTO::class)
+            ->current();
+    }
 }

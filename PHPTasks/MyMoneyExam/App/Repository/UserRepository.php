@@ -12,15 +12,14 @@ class UserRepository extends RepositoryAbstract implements UserRepositoryInterfa
 
     public function insert(UserDTO $userDTO): bool
     {
-        $query = 'INSERT INTO users(username,password,first_name,last_name,born_on)
-                VALUES (?,?,?,?,?)';
+        $query = 'INSERT INTO users(username,password,full_name,born_on)
+                VALUES (?,?,?,?)';
 
         $this->db->query($query)
             ->execute([
                 $userDTO->getUsername(),
                 $userDTO->getPassword(),
-                $userDTO->getFirstName(),
-                $userDTO->getLastName(),
+                $userDTO->getFullName(),
                 $userDTO->getBornOn()
             ]);
         return true;
@@ -32,8 +31,7 @@ class UserRepository extends RepositoryAbstract implements UserRepositoryInterfa
                   id,
                   username,
                   password,
-                  first_name as firstName,
-                  last_name as lastName,
+                  full_name as fullName,
                   born_on as bornOn
                   FROM users WHERE username=?';
 
@@ -49,8 +47,7 @@ class UserRepository extends RepositoryAbstract implements UserRepositoryInterfa
                   id,
                   username,
                   password,
-                  first_name as firstName,
-                  last_name as lastName,
+                  full_name as fullName,
                   born_on as bornOn
                   FROM users WHERE id=?';
 
@@ -62,13 +59,12 @@ class UserRepository extends RepositoryAbstract implements UserRepositoryInterfa
 
     public function update(int $id, UserDTO $userDTO): bool
     {
-        $query = 'UPDATE users SET username=?,password=?, first_name=?, last_name=?,born_on=? WHERE id=?';
+        $query = 'UPDATE users SET username=?,password=?, full_name=?, born_on=? WHERE id=?';
         $this->db->query($query)
             ->execute([
                 $userDTO->getUsername(),
                 $userDTO->getPassword(),
-                $userDTO->getFirstName(),
-                $userDTO->getLastName(),
+                $userDTO->getFullName(),
                 $userDTO->getBornOn(),
                 $id
             ]);
@@ -81,8 +77,7 @@ class UserRepository extends RepositoryAbstract implements UserRepositoryInterfa
                   id,
                   username,
                   password,
-                  first_name as firstName,
-                  last_name as lastName,
+                  full_name as fullName,
                   born_on as bornOn
                   FROM users';
 

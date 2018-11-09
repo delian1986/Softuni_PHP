@@ -57,7 +57,7 @@ class UserHttpHandler extends HttpHandlerAbstract
         $currUser = $this->userService->login($formData['username'], $formData['password']);
         if ($currUser !== null) {
             $_SESSION['id'] = $currUser->getId();
-            $this->redirect('profile.php');
+            $this->redirect('operations.php');
         } else {
             $this->render('users/login', null, ['Username does not exists or password mismatch!']);
         }
@@ -96,15 +96,6 @@ class UserHttpHandler extends HttpHandlerAbstract
     public function allUsers()
     {
         $this->render('users/all', $this->userService->allUsers());
-    }
-
-    public function index()
-    {
-        if (!isset($_SESSION['id'])) {
-            $this->render('home/index');
-        }else{
-            //TODO
-        }
     }
 
     /**

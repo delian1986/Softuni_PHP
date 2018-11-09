@@ -6,6 +6,8 @@ namespace App\Data;
 
 class ReasonDTO
 {
+    private CONST NAME_MIN_LENGTH=3;
+    private CONST NAME_MAX_LENGTH=100;
     /**
      * @var int
      */
@@ -42,9 +44,11 @@ class ReasonDTO
 
     /**
      * @param string $name
+     * @throws \Exception
      */
     public function setName(string $name): void
     {
+        DtoValidator::validate(self::NAME_MIN_LENGTH,self::NAME_MAX_LENGTH,$name,'text','Name');
         $this->name = $name;
     }
 

@@ -27,20 +27,14 @@
     </div>
 
     <div>
-        First Name:<label>
-            <input type="text" name="firstName">
-        </label>
-    </div>
-
-    <div>
-        Last Name:<label>
-            <input type="text" name="lastName">
+        Full Name:<label>
+            <input type="text" name="full_name">
         </label>
     </div>
 
     <div>
         Birthday:<label>
-            <input type="text" name="bornOn">
+            <input type="date" name="born_on">
         </label>
     </div>
     <input type="submit" name="register" value="Register">

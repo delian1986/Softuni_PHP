@@ -6,6 +6,14 @@ namespace App\Data;
 
 class OperationDTO
 {
+    private CONST TYPE_LENGTH=1;
+
+    private CONST SUM_MIN_VALUE=0;
+    private CONST SUM_MAX_VALUE=99999.99;
+
+    private CONST NOTE_MIN_LENGTH=0;
+    private CONST NOTE_MAX_LENGTH=255;
+
     /**
      * @var int
      */
@@ -46,6 +54,8 @@ class OperationDTO
      */
     private $user;
 
+
+
     /**
      * @return int
      */
@@ -72,9 +82,11 @@ class OperationDTO
 
     /**
      * @param string $type
+     * @throws \Exception
      */
     public function setType(string $type): void
     {
+        DtoValidator::validate(self::TYPE_LENGTH,self::TYPE_LENGTH,$type,'text','Type');
         $this->type = $type;
     }
 
@@ -104,9 +116,11 @@ class OperationDTO
 
     /**
      * @param float $sum
+     * @throws \Exception
      */
     public function setSum(float $sum): void
     {
+        DtoValidator::validate(self::SUM_MIN_VALUE,self::SUM_MAX_VALUE,$sum,'number','Sum');
         $this->sum = $sum;
     }
 
@@ -120,9 +134,11 @@ class OperationDTO
 
     /**
      * @param string $notes
+     * @throws \Exception
      */
     public function setNotes(string $notes): void
     {
+        DtoValidator::validate(self::NOTE_MIN_LENGTH,self::NOTE_MAX_LENGTH,$notes,'text','Note');
         $this->notes = $notes;
     }
 

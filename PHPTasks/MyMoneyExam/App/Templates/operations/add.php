@@ -7,8 +7,8 @@
 
 <form method="post">
     Type: <select name="type">
-        <option value="0">Expense</option>
-        <option value="1">Income</option>
+        <option value="O">Expense</option>
+        <option value="I">Income</option>
     </select>
     <br/>
     Reason:<select name="reason_id">

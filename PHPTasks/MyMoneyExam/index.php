@@ -1,7 +1,8 @@
 <?php
 require_once 'common.php';
 
-$userHttpHandler->index();
+$homeHttpHandler=new \App\Http\HomeHttpHandler($template,$dataBinder);
+$homeHttpHandler->index();
 
 
 

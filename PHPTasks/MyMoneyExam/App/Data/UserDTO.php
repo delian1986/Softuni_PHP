@@ -12,6 +12,9 @@ class UserDTO
     private CONST PASSWORD_MIN_LENGTH=4;
     private CONST PASSWORD_MAX_LENGTH=255;
 
+    private CONST FULL_NAME_MIN_LENGTH=5;
+    private CONST FULL_NAME_MAX_LENGTH=255;
+
 
     private $id;
 
@@ -28,12 +31,8 @@ class UserDTO
     /**
      * @var string
      */
-    private $firstName;
+    private $fullName;
 
-    /**
-     * @var string
-     */
-    private $lastName;
 
     /**
      * @var string
@@ -100,36 +99,22 @@ class UserDTO
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getFullName(): string
     {
-        return $this->firstName;
+        return $this->fullName;
     }
 
     /**
-     * @param string $firstName
+     * @param string $fullName
      * @return void
+     * @throws \Exception
      */
-    public function setFirstName(string $firstName): void
+    public function setFullName(string $fullName): void
     {
-        $this->firstName = $firstName;
+        DtoValidator::validate(self::FULL_NAME_MIN_LENGTH,self::FULL_NAME_MAX_LENGTH,$fullName,'text','Full Name');
+        $this->fullName = $fullName;
     }
 
-    /**
-     * @return string
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     * @return void
-     */
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
-    }
 
     /**
      * @return string
