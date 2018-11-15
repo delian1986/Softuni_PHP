@@ -7,7 +7,7 @@ namespace Services\User;
 
 interface UserServiceInterface
 {
-    public function register($obj):bool ;
+    public function register($obj) ;
     public function login(string $username, string $password) ;
     public function currentUser() ;
     public function edit($obj):bool ;

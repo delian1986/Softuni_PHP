@@ -13,8 +13,9 @@ class UsersController extends AbstractController
         echo 'test';
     }
 
-    public function register(UserServiceInterface $userService)
+    public function register(int $id,UserServiceInterface $userService)
     {
+        var_dump($id);
         $userService->register(['sad']);
     }
 }

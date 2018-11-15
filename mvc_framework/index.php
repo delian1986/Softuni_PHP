@@ -13,6 +13,7 @@ $params=$uriParts;
 
 $app=new \Core\Application($controllerName,$actionName,$params);
 $app->addMapping(\Services\User\UserServiceInterface::class,Services\User\UserService::class);
+$app->addMapping(\Core\View\ViewInterface::class,\Core\View\View::class);
 
 $app->start();
 

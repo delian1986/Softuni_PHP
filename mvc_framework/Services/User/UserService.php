@@ -27,7 +27,7 @@ class UserService implements UserServiceInterface
      * @return bool
      * @throws \Exception
      */
-    public function register($obj): bool
+    public function register($obj)
     {
 
         var_dump($obj);
