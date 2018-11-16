@@ -6,5 +6,7 @@ namespace Core\View;
 
 interface ViewInterface
 {
-    public function render($templateName=null,$model=null);
+    public function render($viewName = null, $model = null);
+
+    public function url($controller,$action,...$param);
 }

@@ -5,6 +5,7 @@ namespace Core\View;
 
 
 use Core\Http\RequestInterface;
+use Core\Http\UrlBuilderInterface;
 
 class View implements ViewInterface
 {
@@ -13,39 +14,34 @@ class View implements ViewInterface
      */
     private $request;
 
-
-    private CONST DEFAULT_TEMPLATE_FOLDER = 'views';
-    private CONST DEFAULT_TEMPLATE_EXTENSION = '.php';
+    /**
+     * @var UrlBuilderInterface
+     */
+    private $urlBuilder;
 
     /**
      * View constructor.
      * @param RequestInterface $request
+     * @param UrlBuilderInterface $urlBuilder
      */
-    public function __construct(RequestInterface $request)
+    public function __construct(RequestInterface $request, UrlBuilderInterface $urlBuilder)
     {
         $this->request = $request;
+        $this->urlBuilder = $urlBuilder;
     }
 
-    public function render($templateName = null, $model = null)
+
+    public function render($viewName = null, $model = null)
     {
-        if (is_object($templateName)){
-            $model= $templateName;
-            $templateName=null;
+        if (null == $viewName || is_object($viewName)) {
+            $model = $viewName;
+            $viewName = $this->request->getControllerName() . DIRECTORY_SEPARATOR . $this->request->getActionName();
         }
+        require_once 'views/' . $viewName . '.php';
+    }
 
-        if (null === $templateName) {
-            include self::DEFAULT_TEMPLATE_FOLDER
-                . DIRECTORY_SEPARATOR
-                . $this->request->getControllerName()
-                . DIRECTORY_SEPARATOR
-                . $this->request->getActionName()
-                . self::DEFAULT_TEMPLATE_EXTENSION;
-        } else {
-            include self::DEFAULT_TEMPLATE_FOLDER
-                . DIRECTORY_SEPARATOR
-                . $templateName
-                . self::DEFAULT_TEMPLATE_EXTENSION;
-        }
-
+    public function url($controller, $action, ...$param)
+    {
+        return $this->urlBuilder->build($controller, $action, $param);
     }
 }

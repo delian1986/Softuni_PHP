@@ -1,8 +1,10 @@
 <?php
 
-namespace Models\ViewModels;
 
-class UserRegisterViewModel
+namespace Models\BindingModels;
+
+
+class UserRegisterBindingModel
 {
     /**
      * @var string
@@ -15,15 +17,9 @@ class UserRegisterViewModel
     private $password;
 
     /**
-     * UserRegisterViewModel constructor.
-     * @param string $username
-     * @param string $password
+     * @var string
      */
-    public function __construct(string $username, string $password)
-    {
-        $this->username = $username;
-        $this->password = $password;
-    }
+    private $confirmPassword;
 
     /**
      * @return string
@@ -57,6 +53,21 @@ class UserRegisterViewModel
         $this->password = $password;
     }
 
+    /**
+     * @return string
+     */
+    public function getConfirmPassword(): string
+    {
+        return $this->confirmPassword;
+    }
+
+    /**
+     * @param string $confirmPassword
+     */
+    public function setConfirmPassword(string $confirmPassword): void
+    {
+        $this->confirmPassword = $confirmPassword;
+    }
 
 
 

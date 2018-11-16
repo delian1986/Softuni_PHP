@@ -1,12 +1,22 @@
 <?php
 
+
 namespace Core\Http;
+
 
 interface RequestInterface
 {
-    public function getControllerName():string ;
+    public function getControllerName();
 
-    public function getActionName():string ;
+    public function getActionName();
 
-    public function getQueryString():string ;
+    public function getParameters();
+
+    public function getQueryString();
+
+    public function getExecutingPath();
+
+    public function getHost();
+
+    public function redirect($url);
 }

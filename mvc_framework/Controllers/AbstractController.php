@@ -4,31 +4,40 @@
 namespace Controllers;
 
 
-use Core\Http\RequestInterface;
-use Core\View\View;
+use Core\Http\UrlBuilderInterface;
+use Core\View\ViewInterface;
 
 abstract class AbstractController
 {
     /**
-     * @var View
+     * @var ViewInterface
      */
-    protected $view;
+    private $view;
 
     /**
-     * @var RequestInterface
+     * @var UrlBuilderInterface
      */
-    protected $request;
+    private $urlBuilder;
 
     /**
      * AbstractController constructor.
-     * @param View $view
-     * @param RequestInterface $request
+     * @param ViewInterface $view
+     * @param UrlBuilderInterface $urlBuilder
      */
-    public function __construct(View $view, RequestInterface $request)
+    public function __construct(ViewInterface $view, UrlBuilderInterface $urlBuilder)
     {
         $this->view = $view;
-        $this->request=$request;
+        $this->urlBuilder = $urlBuilder;
     }
 
 
+    protected function render($viewName = null, $model = null)
+    {
+        $this->view->render($viewName,$model);
+    }
+
+    protected function redirect($controller,$action,...$param){
+        header('Location: '. $this->urlBuilder->build($controller,$action,$param));
+        exit();
+    }
 }

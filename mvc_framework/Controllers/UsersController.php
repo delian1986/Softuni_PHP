@@ -2,21 +2,25 @@
 
 namespace Controllers;
 
-
-use Models\ViewModels\UserRegisterViewModel;
-use Services\User\UserServiceInterface;
+use Models\BindingModels\UserRegisterBindingModel;
+use Models\ViewModels\UserProfileViewModel;
+use Service\Users\UserServiceInterface;
 
 class UsersController extends AbstractController
 {
-    public function test()
-    {
-        echo 'test';
+    public function profile(string $firstName,$lastName){
+        $fullName=$firstName . ' '. $lastName;
+        $model=new UserProfileViewModel($fullName);
+        $this->render($model);
     }
 
-    public function register(int $id,UserServiceInterface $userService)
-    {
-        var_dump($id);
-        $userService->register(['sad']);
+    public function register(){
+        $this->render();
     }
+
+    public function registerProcess(UserRegisterBindingModel $bindingModel,UserServiceInterface $userService){
+        $userService->register($bindingModel);
+        $this->redirect('home','index',$bindingModel->getUsername());
+    }
+
 }
-
