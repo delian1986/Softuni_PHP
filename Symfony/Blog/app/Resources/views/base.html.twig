@@ -25,9 +25,9 @@
                 <div class="navbar-header">
                     {#<a href="{{ path('blog_index') }}" class="navbar-brand">SOFTUNI BLOG</a>#}
                     {% if app.user %}
-                        {#<a href="{{ path('article_create') }}" class="navbar-brand">#}
-                            {#Create Article#}
-                        {#</a>#}
+                        <a href="{{ path('article_create') }}" class="navbar-brand">
+                            Create ArticleType
+                        </a>
                     {% endif %}
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -50,14 +50,14 @@
                             </li>
                         {% else %}
                             <li>
-                                {#<a href="{{ path('user_register') }}">#}
-                                    {#REGISTER#}
-                                {#</a>#}
+                                <a href="{{ path('user_register') }}">
+                                    REGISTER
+                                </a>
                             </li>
                             <li>
-                                {#<a href="{{ path('security_login') }}">#}
-                                    {#LOGIN#}
-                                {#</a>#}
+                                <a href="{{ path('security_login') }}">
+                                    LOGIN
+                                </a>
                             </li>
                         {% endif %}
                     </ul>

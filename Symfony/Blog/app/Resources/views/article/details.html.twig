@@ -14,11 +14,12 @@
                     </p>
 
                     <small class="author">
-                        {{ article.author }}
+                        {{ article.author.username }}
                     </small>
 
                     <footer>
                         <div class="pull-right">
+                            <a class="btn btn-primary btn-xs" href="{{ path('article_edit',{'id':article.id}) }}">edit &raquo;</a>
                             <a class="btn btn-default btn-xs" href="{{ path('blog_index') }}">back &raquo;</a>
                         </div>
                     </footer>
