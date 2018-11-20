@@ -4,6 +4,7 @@ namespace SoftUniBlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use SoftUniBlogBundle\SoftUniBlogBundle;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -51,11 +52,22 @@ class User implements UserInterface
     private $articles;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Role")
+     * @ORM\JoinTable(name="users_roles"),joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},inverseJoinColumns={@ORM\JoinColumn(name="role_id",referencedColumnName="id")})
+     *
+     *
+     */
+    private $roles;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->roles= new ArrayCollection();
     }
 
     /**
@@ -176,7 +188,23 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return [];
+       $stringRoles=[];
+       foreach ($this->roles as $role){
+           /** @var $role Role */
+           $stringRoles[]=$role->getRole();
+       }
+
+       return $stringRoles;
+    }
+
+    /**
+     * @param \SoftUniBlogBundle\Entity\Role $role
+     * @return User
+     */
+    public function addRole(Role $role){
+        $this->roles[]=$role;
+
+        return $this;
     }
 
     /**
