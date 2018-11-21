@@ -38,9 +38,10 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
+
                             <li>
                                 <a href="{{ path('user_profile') }}">
-                                    Profile
+                                    {{ app.user.fullname }}'s Profile
                                 </a>
                             </li>
                             <li>

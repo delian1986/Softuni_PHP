@@ -49,7 +49,25 @@ class UsersController extends Controller
      */
     public function userProfile()
     {
+        /** @var User $currentUser */
         $currentUser = $this->getUser();
         return $this->render('user/profile.html.twig', ['user' => $currentUser]);
+    }
+
+    /**
+     * @Route("/admin",name="admin_panel")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function adminPanel(){
+        /** @var User $currUser */
+        $currUser=$this->getUser();
+
+        if (!$currUser->isAdmin()){
+            return $this->redirectToRoute('blog_index');
+        }
+
+        $roles=$this->getDoctrine()->getRepository(Role::class)->findAll();
+        var_dump($roles);
+
     }
 }

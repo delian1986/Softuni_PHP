@@ -4,6 +4,7 @@ namespace SoftUniBlogBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use SoftUniBlogBundle\Entity\Article;
+use SoftUniBlogBundle\Entity\User;
 use SoftUniBlogBundle\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -70,6 +71,13 @@ class ArticleController extends Controller
             return $this->redirectToRoute('blog_index');
         }
 
+        /** @var User $currentUser */
+        $currentUser=$this->getUser();
+
+        if (!$currentUser->isAuthor($article) || !$currentUser->isAdmin() ){
+            return $this->redirectToRoute('blog_index');
+        }
+
         $form=$this->createForm(ArticleType::class,$article);
         $form->handleRequest($request);
 
@@ -100,6 +108,13 @@ class ArticleController extends Controller
         $article= $this->getDoctrine()->getRepository(Article::class)->find($id);
 
         if(null===$article){
+            return $this->redirectToRoute('blog_index');
+        }
+
+        /** @var User $currentUser */
+        $currentUser=$this->getUser();
+
+        if (!$currentUser->isAuthor($article) || !$currentUser->isAdmin() ){
             return $this->redirectToRoute('blog_index');
         }
 

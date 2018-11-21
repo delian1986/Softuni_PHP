@@ -4,8 +4,19 @@
 
 {% block main %}
     <div>
-        {{ user.email }}
+       Username: {{ user.email }}
         <br>
-        {{ user.fullName }}
+        Full name: {{ user.fullName }}
+        <br>
+        Roles:
+        {% for role in user.roles %}
+        {{ role }}
+            <br>
+        {% endfor %}
+        Articles Created:
+        {% for article in user.articles %}
+        <a href="{{ path('article_view', {'id': article.id}) }}"> {{ article.title}}</a>
+            <br>
+        {% endfor %}
     </div>
 {% endblock %}
