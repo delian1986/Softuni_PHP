@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block main%}
+    {# @var role \SoftUniBlogBundle\Entity\Role#}
+    {% for role in roles %}
+        <label>
+            <select name="role">
+            <option value="{{ role.id}}">{{ role.name }}</option>
+            </select>
+        </label>
+    {% endfor %}
+    <br>
+
+    {# @var user \SoftUniBlogBundle\Entity\User#}
+    {% for user in users %}
+        <label>
+            <select name="user">
+                <option value="{{ user.id}}">{{ user.username }}</option>
+            </select>
+        </label>
+    {% endfor %}
+{% endblock %}
