@@ -6,3 +6,8 @@ soft_uni_blog_rest_api:
 app:
     resource: '@SoftUniBlogBundle/Controller/'
     type: annotation
+
+soft_uni_blog_admin_panel:
+    resource: "@SoftUniBlogRestApiBundle/Controller/"
+    type:     annotation
+    prefix:   /admin

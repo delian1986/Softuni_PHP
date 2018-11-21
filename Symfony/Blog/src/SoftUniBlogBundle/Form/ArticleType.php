@@ -21,6 +21,4 @@ class ArticleType extends AbstractType
             'data_class' =>'SoftUniBlogBundle\Entity\Article'
         ));
     }
-
-
 }

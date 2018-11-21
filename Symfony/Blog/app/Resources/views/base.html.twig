@@ -39,6 +39,14 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
 
+                            {% if app.getUser().isAdmin() %}
+                                <li>
+                                    <a href="{{ path('admin_panel') }}">
+                                        ADMIN PANEL
+                                    </a>
+                                </li>
+                            {% endif %}
+
                             <li>
                                 <a href="{{ path('user_profile') }}">
                                     {{ app.user.fullname }}'s Profile
