@@ -27,8 +27,14 @@ class UsersController extends Controller
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
 
-            $roleRepository=$this->getDoctrine()->getRepository(Role::class);
-            $userRole=$roleRepository->findOneBy(['name'=>'ROLE_USER']);
+            $roleRepository = $this->getDoctrine()->getRepository(Role::class);
+
+            //If there is no users in DB first one should be ADMIN all others are USERS
+            if ( $this->getCountOfRegisteredUsers() === 0) {
+                $userRole = $roleRepository->findOneBy(['name' => 'ROLE_ADMIN']);
+            } else {
+                $userRole = $roleRepository->findOneBy(['name' => 'ROLE_USER']);
+            }
 
             $user->setPassword($password);
             $user->addRole($userRole);
@@ -52,6 +58,14 @@ class UsersController extends Controller
         /** @var User $currentUser */
         $currentUser = $this->getUser();
         return $this->render('user/profile.html.twig', ['user' => $currentUser]);
+    }
+
+    /**
+     * @return int
+     */
+    private function getCountOfRegisteredUsers()
+    {
+        return count($this->getDoctrine()->getRepository(User::class)->findAll());
     }
 
 

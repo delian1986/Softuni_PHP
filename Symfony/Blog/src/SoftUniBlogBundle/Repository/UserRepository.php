@@ -10,4 +10,8 @@ namespace SoftUniBlogBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+//    public function addUserRole(USer){
+//        $sql='INSERT INTO users_roles
+//              '
+//    }
 }

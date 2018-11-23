@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation\Expose;
  *
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="SoftUniBlogBundle\Repository\ArticleRepository")
- * @ExclusionPolicy("all)
+ * @ExclusionPolicy("all")
  */
 class Article
 {
@@ -64,7 +64,6 @@ class Article
     public function __construct()
     {
         $this->dateAdded = new \DateTime('now');
-//        $this->setSummary();
     }
 
     /**
