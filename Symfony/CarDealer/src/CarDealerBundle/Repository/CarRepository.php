@@ -2,6 +2,8 @@
 
 namespace CarDealerBundle\Repository;
 
+use CarDealerBundle\Entity\Cars;
+
 /**
  * CarRepository
  *
@@ -10,4 +12,31 @@ namespace CarDealerBundle\Repository;
  */
 class CarRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param string $make
+     * @return Cars[]
+     */
+    public function getCarsByMake($make){
+        return $this->createQueryBuilder('cars')
+            ->select('cars')
+            ->where('cars.make = :make')
+            ->addOrderBy('cars.model')
+            ->addOrderBy('cars.travelledDistance','DESC')
+            ->setParameter('make',$make)
+            ->getQuery()->getResult();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getCarParts($id){
+        return $this->createQueryBuilder('cars')
+            ->select('cars.parts')
+            ->where('cars.id == :id')
+            ->setParameter('id',$id)
+            ->getQuery()->getResult();
+    }
+
+
 }

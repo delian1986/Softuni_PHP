@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Cars
  *
- * @ORM\Table(name="car")
+ * @ORM\Table(name="cars")
  * @ORM\Entity(repositoryClass="CarDealerBundle\Repository\CarRepository")
  */
 class Cars
@@ -16,7 +16,7 @@ class Cars
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
+     * @ORM\id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -24,31 +24,31 @@ class Cars
     /**
      * @var string
      *
-     * @ORM\Column(name="Make", type="string", length=255)
+     * @ORM\Column(name="make", type="string", length=255)
      */
     private $make;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Model", type="string", length=255)
+     * @ORM\Column(name="model", type="string", length=255)
      */
     private $model;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="TravelledDistance", type="integer")
+     * @ORM\Column(name="travelledDistance", type="integer")
      */
     private $travelledDistance;
 
     /**
 
-     * @ORM\ManyToMany(targetEntity="Parts.php", inversedBy="cars")
-     * @ORM\JoinTable(name="part_cars",
-     *      joinColumns={@ORM\JoinColumn(name="Part_Id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="CarDealerBundle\Entity\Parts", inversedBy="cars")
+     * @ORM\JoinTable(name="parts_cars",
+     *      joinColumns={@ORM\JoinColumn(name="part_Id", referencedColumnName="id")
      *      },
-     *      inverseJoinColumns={@ORM\JoinColumn(name="Car_Id", referencedColumnName="id")
+     *      inverseJoinColumns={@ORM\JoinColumn(name="car_Id", referencedColumnName="id")
      *      })
      *
      */

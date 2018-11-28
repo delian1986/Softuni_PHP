@@ -10,4 +10,17 @@ namespace CarDealerBundle\Repository;
  */
 class SupplierRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param string $type
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getAllSuppliersByType($type){
+        $isImporter=false;
+        if ($type){
+            $isImporter=true;
+        }
+        return $this->createQueryBuilder('suppliers')->where('suppliers.isImporter == :isImporter')
+            ->setParameter('isImporter',$isImporter)
+            ->getQuery()->getResult();
+    }
 }

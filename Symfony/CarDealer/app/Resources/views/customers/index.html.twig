@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <p>Order our customers by birth date in <a href="{{ path('customers_ordered',{'criteria':'ascending'}) }}" >ascending</a> or <a href="{{ path('customers_ordered',{'criteria':'descending'}) }}">descending</a> order</p>
+    <table border="1px">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Birth Date</td>
+            <td>Younger Driver</td>
+        </tr>
+        {# @var customer \CarDealerBundle\Entity\Customers#}
+        {% for customer in customers %}
+            <tr>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.birthDate|date('Y-m-d') }}</td>
+            {% if customer.isYoungDriver==0 %}
+                <td>No</td>
+            {% else %}
+                <td>Yes</td>
+            {% endif %}
+        {% endfor %}
+            </tr>
+        </thead>
+    </table>
+{% endblock %}

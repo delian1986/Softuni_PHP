@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Customers
  *
- * @ORM\Table(name="customer")
+ * @ORM\Table(name="customers")
  * @ORM\Entity(repositoryClass="CarDealerBundle\Repository\CustomerRepository")
  */
 class Customers
@@ -16,7 +16,7 @@ class Customers
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
+     * @ORM\id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -24,27 +24,27 @@ class Customers
     /**
      * @var string
      *
-     * @ORM\Column(name="Name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="BirthDate", type="date")
+     * @ORM\Column(name="birthDate", type="datetime")
      */
     private $birthDate;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="IsYoungDriver", type="boolean")
+     * @ORM\Column(name="isYoungDriver", type="boolean")
      */
     private $isYoungDriver;
 
     /**
      * One customer has many sales
-     * @ORM\OneToMany(targetEntity="Sales.php", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="CarDealerBundle\Entity\Sales", mappedBy="customer")
      */
     private $sales;
 

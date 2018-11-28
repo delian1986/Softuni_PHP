@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Parts
  *
- * @ORM\Table(name="part")
+ * @ORM\Table(name="parts")
  * @ORM\Entity(repositoryClass="CarDealerBundle\Repository\PartRepository")
  */
 class Parts
@@ -16,7 +16,7 @@ class Parts
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
+     * @ORM\id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -24,33 +24,33 @@ class Parts
     /**
      * @var string
      *
-     * @ORM\Column(name="Name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Price", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
      */
     private $price;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="Quantity", type="integer")
+     * @ORM\Column(name="quantity", type="integer")
      */
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Suppliers.php", inversedBy="parts")
-     * @ORM\JoinColumn("Supplier_Id",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="CarDealerBundle\Entity\Suppliers", inversedBy="parts")
+     * @ORM\JoinColumn("supplier_Id",referencedColumnName="id")
      */
     private $supplier;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cars.php", mappedBy="parts")
-     * @ORM\JoinTable(name="part_cars")
+     * @ORM\ManyToMany(targetEntity="CarDealerBundle\Entity\Cars", mappedBy="parts")
+     * @ORM\JoinTable(name="parts_cars")
      */
     private $cars;
 

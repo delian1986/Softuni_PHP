@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Sales
  *
- * @ORM\Table(name="sale")
+ * @ORM\Table(name="sales")
  * @ORM\Entity(repositoryClass="CarDealerBundle\Repository\SaleRepository")
  */
 class Sales
@@ -30,14 +30,14 @@ class Sales
 
     /**
      * One car is sold in One Sales
-     * @ORM\OneToOne(targetEntity="Cars.php")
+     * @ORM\OneToOne(targetEntity="CarDealerBundle\Entity\Cars")
      * @ORM\JoinColumn(name="Car_Id", referencedColumnName="id")
      */
     private $car;
 
     /**
      * Many Sales have One Customers
-     * @ORM\ManyToOne(targetEntity="Customers.php", inversedBy="sales")
+     * @ORM\ManyToOne(targetEntity="CarDealerBundle\Entity\Customers", inversedBy="sales")
      * @ORM\JoinColumn(name="Customer_Id", referencedColumnName="id")
      */
     private $customer;
@@ -53,7 +53,7 @@ class Sales
     /**
      * @param mixed $car
      */
-    public function setCar($car): void
+    public function setCar($car)
     {
         $this->car = $car;
     }

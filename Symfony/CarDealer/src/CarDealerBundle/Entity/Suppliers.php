@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Suppliers
  *
- * @ORM\Table(name="supplier")
+ * @ORM\Table(name="suppliers")
  * @ORM\Entity(repositoryClass="CarDealerBundle\Repository\SupplierRepository")
  */
 class Suppliers
@@ -17,7 +17,7 @@ class Suppliers
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
+     * @ORM\id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -25,19 +25,19 @@ class Suppliers
     /**
      * @var string
      *
-     * @ORM\Column(name="Name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="IsImporter", type="boolean")
+     * @ORM\Column(name="isImporter", type="boolean")
      */
     private $isImporter;
 
     /**
-     * @ORM\OneToMany(targetEntity="Parts.php", mappedBy="parts")
+     * @ORM\OneToMany(targetEntity="CarDealerBundle\Entity\Parts", mappedBy="supplier")
      */
     private $parts;
 
