@@ -1,5 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ car.model }}</h1>
+    <h1>{{ car.make }} {{ car.model }}</h1>
+    <p>Traveled {{ car.travelledDistance }} km</p>
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        {% for part in parts %}
+            <tr>
+                <td>{{ part.name }}</td>
+                <td>{{ part.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p>Total cost of parts: {{ car.costOfParts }}</p>
 {% endblock %}

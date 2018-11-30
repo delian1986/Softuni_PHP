@@ -45,8 +45,8 @@ class CarsController extends Controller
     public function viewPartsDetails(int $id){
         /** @var Cars $car */
         $car= $this->getDoctrine()->getRepository(Cars::class)->find($id);
-        var_dump($car);exit;
-        return $this->render('cars/details.html.twig',['car'=>$car]);
+        $parts=$car->getParts();
+        return $this->render('cars/details.html.twig',['car'=>$car,'parts'=>$parts]);
     }
 
 }

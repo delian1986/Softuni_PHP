@@ -36,11 +36,30 @@ class Sales
     private $car;
 
     /**
+     * @var Customers
      * Many Sales have One Customers
      * @ORM\ManyToOne(targetEntity="CarDealerBundle\Entity\Customers", inversedBy="sales")
      * @ORM\JoinColumn(name="Customer_Id", referencedColumnName="id")
      */
     private $customer;
+
+    /**
+     * @return Customers
+     */
+    public function getCustomer(): Customers
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param Customers $customer
+     */
+    public function setCustomer(Customers $customer)
+    {
+        $this->customer = $customer;
+    }
+
+
 
     /**
      * @return mixed

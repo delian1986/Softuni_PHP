@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Sales</h1>
+
+    <table border="1">
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Travelled Distance</th>
+            <th>Buyer</th>
+            <th>Price</th>
+        </tr>
+
+        {# @var sale \CarDealerBundle\Entity\Sales #}
+        {% for sale in sales %}
+            <tr>
+                <td>{{ sale.car.make }}</td>
+                <td>{{ sale.car.model }}</td>
+                <td>{{ sale.car.travelledDistance }}</td>
+                <td>{{ sale.customer.name }}</td>
+                <td>{{ sale.discount }} %</td>
+        {% endfor %}
+    </table>
+
+{% endblock %}

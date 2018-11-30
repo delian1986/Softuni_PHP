@@ -55,6 +55,13 @@ class Cars
      */
     private $parts;
 
+    /**
+     * @var float
+     */
+    private $costOfParts;
+
+
+
     public function __construct()
     {
         $this->parts=new ArrayCollection();
@@ -159,5 +166,26 @@ class Cars
     public function getTravelledDistance()
     {
         return $this->travelledDistance;
+    }
+
+    /**
+     * @return float
+     */
+    public function getCostOfParts(): float
+    {
+        $this->setCostOfParts();
+        return $this->costOfParts;
+    }
+
+
+    public function setCostOfParts()
+    {
+        $carParts=$this->getParts();
+        $total=0;
+        /** @var Parts $part */
+        foreach ($carParts as $part){
+            $total+=$part->getPrice();
+        }
+        $this->costOfParts = $total;
     }
 }
