@@ -37,10 +37,34 @@ class Suppliers
     private $isImporter;
 
     /**
+     * @var ArrayCollection|Parts
      * @ORM\OneToMany(targetEntity="CarDealerBundle\Entity\Parts", mappedBy="supplier")
      */
     private $parts;
 
+    public function __construct()
+    {
+        $this->parts=new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getParts()
+    {
+        return $this->parts;
+    }
+
+    /**
+     * @param Parts
+     * @return Suppliers
+     */
+    public function setParts(Parts $parts)
+    {
+        $this->parts[] = $parts;
+
+        return $this;
+    }
 
     /**
      * Get id.

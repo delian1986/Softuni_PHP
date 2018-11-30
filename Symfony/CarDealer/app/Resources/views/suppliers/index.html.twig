@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Our {{ page|default("") }} Suppliers</h1>
+    <a href="{{ path('suppliers_by_type',{param: 'local'}) }}">View local suppliers</a> | <a href="{{ path('suppliers_by_type',{param: 'importers'}) }}">View importer suppliers</a> | <a href="{{ path('suppliers_index') }}">View all suppliers</a>
+    <br/>
+    <br/>
+
+<table border="1px">
+    <tr>
+        <th>Name</th>
+        <th>Number of supplying parts</th>
+    </tr>
+    {# @var supply \CarDealerBundle\Entity\Suppliers#}
+    {% for supply in suppliers %}
+        <tr>
+            <td>{{ supply.name }}</td>
+            <td>{{ supply.parts.count }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace CarDealerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,16 +44,57 @@ class Parts
     private $quantity;
 
     /**
+     * @var Suppliers
      * @ORM\ManyToOne(targetEntity="CarDealerBundle\Entity\Suppliers", inversedBy="parts")
      * @ORM\JoinColumn("supplier_Id",referencedColumnName="id")
      */
     private $supplier;
 
     /**
+     * @var ArrayCollection|Cars
      * @ORM\ManyToMany(targetEntity="CarDealerBundle\Entity\Cars", mappedBy="parts")
      * @ORM\JoinTable(name="parts_cars")
      */
     private $cars;
+
+    public function __construct()
+    {
+        $this->cars=new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSupplier()
+    {
+        return $this->supplier;
+    }
+
+    /**
+     * @param mixed $supplier
+     */
+    public function setSupplier($supplier)
+    {
+        $this->supplier = $supplier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCars()
+    {
+        return $this->cars;
+    }
+
+    /**
+     * @param mixed $cars
+     * @return Parts
+     */
+    public function setCars($cars)
+    {
+        $this->cars[] = $cars;
+        return $this;
+    }
 
 
     /**

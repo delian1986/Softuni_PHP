@@ -2,6 +2,7 @@
 
 namespace CarDealerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,7 +44,7 @@ class Cars
     private $travelledDistance;
 
     /**
-
+     * @var ArrayCollection|Parts
      * @ORM\ManyToMany(targetEntity="CarDealerBundle\Entity\Parts", inversedBy="cars")
      * @ORM\JoinTable(name="parts_cars",
      *      joinColumns={@ORM\JoinColumn(name="part_Id", referencedColumnName="id")
@@ -54,6 +55,28 @@ class Cars
      */
     private $parts;
 
+    public function __construct()
+    {
+        $this->parts=new ArrayCollection();
+    }
+
+    /**
+     * @return Parts|ArrayCollection
+     */
+    public function getParts()
+    {
+        return $this->parts;
+    }
+
+    /**
+     * @param Parts|ArrayCollection $parts
+     * @return Cars
+     */
+    public function setParts(Parts $parts)
+    {
+        $this->parts[] = $parts;
+        return $this;
+    }
 
 
     /**

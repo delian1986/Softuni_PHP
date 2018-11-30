@@ -19,7 +19,7 @@ class SupplierRepository extends \Doctrine\ORM\EntityRepository
         if ($type){
             $isImporter=true;
         }
-        return $this->createQueryBuilder('suppliers')->where('suppliers.isImporter == :isImporter')
+        return $this->createQueryBuilder('suppliers')->where('suppliers.isImporter = :isImporter')
             ->setParameter('isImporter',$isImporter)
             ->getQuery()->getResult();
     }

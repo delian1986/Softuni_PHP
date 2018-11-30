@@ -30,11 +30,23 @@ class CarsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Cars $car */
             $car = $form->get('make')->getData();
-            $carsByMake = $this->getDoctrine()->getRepository(Cars::class)->getCarsByMake($car->getMake());
-            return $this->render('cars/list.html.twig', ['form' => $form->createView(), 'cars' => $carsByMake]);
+            $carsBySelectedMake = $this->getDoctrine()->getRepository(Cars::class)->getCarsByMake($car->getMake());
+            return $this->render('cars/list.html.twig', ['form' => $form->createView(), 'cars' => $carsBySelectedMake]);
         }
 
         return $this->render('cars/index.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/{id}/parts", name="parts_details")
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewPartsDetails(int $id){
+        /** @var Cars $car */
+        $car= $this->getDoctrine()->getRepository(Cars::class)->find($id);
+        var_dump($car);exit;
+        return $this->render('cars/details.html.twig',['car'=>$car]);
     }
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Car DB exercise!{% endblock %}</title>
@@ -12,11 +12,13 @@
         <li><a href="{{ path('homepage') }}">Home</a></li>
         <li><a href="{{ path('customers_index') }}">Customers</a></li>
         <li><a href="{{ path('cars_index') }}">Cars</a></li>
+        <li><a href="{{ path('suppliers_index') }}">Suppliers</a></li>
     </ul>
     <hr>
     <h3>Browse Our Database</h3>
 
     {% block body %}{% endblock %}
+    
         {% block javascripts %}{% endblock %}
     </body>
 </html>
