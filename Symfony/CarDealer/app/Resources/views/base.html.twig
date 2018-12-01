@@ -16,9 +16,13 @@
         <li><a href="{{ path('all_sales') }}">Sales</a></li>
     </ul>
     <hr>
-    <h3>Browse Our Database</h3>
+    <h3>Please use the navigation bar to browse Our Database</h3>
 
     {% block body %}{% endblock %}
+    {% block footer %}
+        <hr/>
+        <p>Software University 2018</p>
+    {% endblock %}
     
         {% block javascripts %}{% endblock %}
     </body>

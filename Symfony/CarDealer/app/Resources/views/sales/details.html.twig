@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('all_sales') }}">View all sales</a> | <a href="{{ path('sales_discounted') }}">View all discounted sales</a>
+    <h1>Details for sale No. {{ sale.id }}</h1>
+    <h2>Car model: {{ sale.car.make }} {{ sale.car.model }} </h2>
+        <h4>Travelled {{ sale.car.travelledDistance }} km</h4>
+    <h3>Buyer: {{ sale.customer.name }}</h3>
+    <h4>Cost of parts: {{ sale.car.costOfParts }}</h4>
+    <h4>Applied discount for the sale: {{ sale.discount *100 }} %</h4>
+{% endblock %}
+

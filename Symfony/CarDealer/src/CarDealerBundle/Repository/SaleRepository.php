@@ -10,4 +10,22 @@ namespace CarDealerBundle\Repository;
  */
 class SaleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findDiscountsGreaterThan($percent){
+        $em=$this->getEntityManager();
+        $qb=$em->createQueryBuilder();
+
+        $query=$qb->select(['s'])
+            ->from('CarDealerBundle:Sales','s')
+            ->where($qb->expr()->gt('s.discount',$percent))
+            ->orderBy('s.discount','DESC')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function findAllByPercent(float $percent){
+        return $this->createQueryBuilder('sales')->where('sales.discount=:percent')
+            ->setParameter('percent',$percent)
+            ->getQuery()->getResult();
+    }
 }

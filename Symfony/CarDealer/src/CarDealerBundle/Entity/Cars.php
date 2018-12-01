@@ -187,5 +187,7 @@ class Cars
             $total+=$part->getPrice();
         }
         $this->costOfParts = $total;
+
+        return $this;
     }
 }

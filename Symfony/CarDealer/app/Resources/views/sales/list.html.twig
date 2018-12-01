@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('all_sales') }}">View all sales</a> | <a href="{{ path('sales_discounted') }}">View all discounted sales</a> |
+    {{ form_start(form,{'action':path('sales_discounted_by_percent')}) }}
+    {{ form_end(form) }}
+
+    <h1>All {{ pageLabel|default('') }} Sales</h1>
+
+    <table border="1">
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Travelled Distance</th>
+            <th>Buyer</th>
+            <th>Parts total price</th>
+            <th>Discount of car</th>
+            <th>Details</th>
+        </tr>
+
+        {# @var sale \CarDealerBundle\Entity\Sales #}
+        {% for sale in sales %}
+            <tr>
+                <td>{{ sale.car.make }}</td>
+                <td>{{ sale.car.model }}</td>
+                <td>{{ sale.car.travelledDistance }}</td>
+                <td>{{ sale.customer.name }}</td>
+                <td>{{ sale.car.CostOfParts }}</td>
+                <td>{{ sale.discount *100 }} %</td>
+                <td><a href="{{ path('sale_details',{'id':sale.id}) }}">View</a></td>
+        {% endfor %}
+    </table>
+
+{% endblock %}

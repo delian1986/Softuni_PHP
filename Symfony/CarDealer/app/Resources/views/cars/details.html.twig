@@ -9,12 +9,19 @@
             <th>Name</th>
             <th>Price</th>
         </tr>
-        {% for part in parts %}
+        {% if parts is not empty %}
+            {% for part in parts %}
+                <tr>
+                    <td>{{ part.name }}</td>
+                    <td>{{ part.price }}</td>
+                </tr>
+            {% endfor %}
+
+        {% else %}
             <tr>
-                <td>{{ part.name }}</td>
-                <td>{{ part.price }}</td>
+                <td colspan="2">No parts form our suppliers</td>
             </tr>
-        {% endfor %}
+        {% endif %}
     </table>
     <p>Total cost of parts: {{ car.costOfParts }}</p>
 {% endblock %}
