@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('all_sales') }}">View all sales</a> | <a href="{{ path('sales_discounted') }}">View all discounted sales</a> |
-    {{ form_start(form,{'action':path('sales_discounted_by_percent')}) }}
-    {{ form_end(form) }}
+    <a href="{{ path('all_sales') }}">View all sales</a> | <a href="{{ path('sales_discounted') }}">View all discounted sales</a>
 
     <h1>All {{ pageLabel|default('') }} Sales</h1>
 
