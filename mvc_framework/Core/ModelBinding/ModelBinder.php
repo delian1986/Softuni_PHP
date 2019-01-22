@@ -23,7 +23,7 @@ class ModelBinder implements ModelBinderInterface
                 $setter = 'set' . implode(array_map(function ($element) {
                         return ucfirst($element);
                     }, explode('_', $propertyName)));
-                $bindingModel->$setter($_POST[$propertyName]);
+                $bindingModel->$setter($data[$propertyName]);
             }
         }
 
